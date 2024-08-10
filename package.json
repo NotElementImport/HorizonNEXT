@@ -10,7 +10,7 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --ssrManifest --outDir dist/client",
     "build:server": "vite build --ssr src/server/entry-server.ts --outDir dist/server",
-    "preview": "cross-env NODE_ENV=production node server"
+    "prod": "cross-env NODE_ENV=production node server"
   },
   "devDependencies": {
     "@types/node": "^22.1.0",
