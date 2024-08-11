@@ -7,6 +7,11 @@ interface IDomProps {
     class?: string | string[] | Function
     style?: string | Function
 }
+
+interface IDomTextProps extends IDomProps {
+    clamp?: number
+}
+
 interface IDomImgProps extends IDomProps {
     width?: string,
     loading?: "eager"| "lazy",
@@ -46,7 +51,12 @@ interface IComponent<T> {
     render(props: T, context: any): void|Promise<void>
 }
 
+type VerboseType = 'Client' | 'Server' | 'API'
+
 interface IComponentBuilder {
+    slip(slot: () => Promise<void>, errorSlot: (type: VerboseType, error: any) => void): Promise<void>
+    slip(slot: () => void, errorSlot: (type: VerboseType, error: any) => void): void
+
     dom<T>(type: keyof HTMLElementTagNameMap | T, props: IDomProps): IDomResponse<T>
     dom<T>(type: keyof HTMLElementTagNameMap | T, props: IDomProps, slot: (r: IDomResponse<T>) => Promise<void>): Promise<IDomResponse<T>>
     dom<T>(type: keyof HTMLElementTagNameMap | T, props: IDomProps, slot: (r: IDomResponse<T>) => void): IDomResponse<T>
@@ -60,7 +70,7 @@ interface IComponentBuilder {
     section(props: IDomProps, slot: (r: IDomResponse<'section'>) => Promise<void>): Promise<IDomResponse<'section'>>
     section(props: IDomProps, slot?: (r: IDomResponse<'section'>) => void): IDomResponse<'section'>
 
-    text(label: string|number|State<any>|Function, props?: IDomProps): IDomResponse<'span'>
+    text(label: string|number|State<any>|Function, props?: IDomTextProps): IDomResponse<'span'>
     img(src: string|State<any>|Function, props?: IDomImgProps): IDomResponse<'img'>
     input(model: State<string?>, props?: IDomInputProps, handle?: (p: IDomInputResponse<'input'>) => void): IDomInputResponse<'input'>
 

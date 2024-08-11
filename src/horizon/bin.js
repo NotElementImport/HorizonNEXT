@@ -196,6 +196,43 @@ export const comp = (handle) => {
                         isSkip = oldIsSkip
                         return after
                     },
+                    slip(slot, errorSlot = () => {}) {
+                        let after = null;
+
+                        try {
+                            after = slot()
+                        }
+                        catch(e) {
+                            let type = isClient ? 'Client' : 'Server';
+
+                            if(e?.type == 'API')
+                                type = e?.type
+
+                            console.error('Slip catch: ', {
+                                where: type,
+                                error: e
+                            })
+
+                            return errorSlot(type, e)
+                        }
+
+                        if(isPromise(after)) {
+                            return after.catch(e => {
+                                let type = isClient ? 'Client' : 'Server';
+
+                                if(e?.type == 'API')
+                                    type = e?.type
+
+                                console.error('Slip catch: ', {
+                                    where: type,
+                                    error: e
+                                })
+                                
+                                return errorSlot(type, e)
+                            })
+                        }
+                        return after
+                    },
                 }
             }
             // Render Structure

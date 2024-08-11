@@ -1,6 +1,6 @@
 import { comp } from '../horizon/index'
 
-export default comp(async (_, { section, onlyServer, text, slot, img }) => {
+export default comp((_, { section, onlyServer, text, slot, img }) => {
     section({ class: 'app__layout' }, _ => {
         onlyServer(() => {
             section({ class: 'app__title' }, _ => {

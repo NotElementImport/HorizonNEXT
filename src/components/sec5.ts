@@ -1,7 +1,7 @@
 import { comp } from '../horizon/index'
 import sectionWrapper from './sectionWrapper'
 
-export default comp(async (_, { use, onlyServer, text }) => {
+export default comp((_, { use, onlyServer, text, section }) => {
     use(sectionWrapper, {
         title: '5. Константные элементы (Для оптимизации)',
         desc: 'Их рисует только сервер и клиент не может с ними взаимодействовать'

@@ -241,9 +241,18 @@ export default (p) => {
                 content = () => value;
             }
  
+            let style = props.style ?? ''
+
+            if(props.clamp) {
+                props['data-textbox'] = true;
+                style += `-webkit-line-clamp: ${props.clamp}`;
+                delete props.clamp;
+            }
+
             const domMeta = {
                 type: 'span',
                 props: {
+                    style,
                     index: childrenCount(),
                     id: genUID(childrenCount() + 1, 'span'),
                     ...props
@@ -361,7 +370,7 @@ export default (p) => {
 
             append(domMeta);
             return dom
-        },
+        }
     }
     return drawble
 };

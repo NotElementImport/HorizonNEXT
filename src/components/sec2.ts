@@ -1,7 +1,7 @@
 import { comp } from '../horizon/index'
 import sectionWrapper from './sectionWrapper'
 
-export default comp(async (_, { use, dom }) => {
+export default comp((_, { use, dom }) => {
     use(sectionWrapper, {
         title: '2. Состояние у статического DOM-а',
         desc: 'Можно изменять состояние DOM без State-а'

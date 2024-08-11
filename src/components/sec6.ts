@@ -6,14 +6,14 @@ interface ITodo {
     complete: boolean
 }
 
-export default comp(async (_, { use, section, input, dom, dyn, text }) => {
+export default comp((_, { use, section, input, dom, dyn, text }) => {
     use(sectionWrapper, {
         title: '6. Пример TODO лист: ',
         desc: 'Полный пример всего функционала'
     }, () => {
         // Script:
-        let allTodos = ref<ITodo[]>([])
-        let newTodo = mut('')
+        const allTodos = ref<ITodo[]>([])
+        const newTodo  = mut('')
 
         const addTodo = () => {
             // Protect:

@@ -1,7 +1,7 @@
 import { comp } from '../horizon/index'
 import sectionWrapper from './sectionWrapper'
 
-export default comp(async (_, { use, onlyClient, text }) => {
+export default comp((_, { use, onlyClient, text }) => {
     use(sectionWrapper, {
         title: '4. Только на клиенте',
         desc: 'Можно отрисовывать контент только на клиенте'
